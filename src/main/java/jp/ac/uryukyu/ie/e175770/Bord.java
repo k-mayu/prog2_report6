@@ -5,7 +5,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+
+
 public class Bord extends JFrame {
+    private int num;
+    private int count;
+
 
     public Bord() {
         // ウィンドウの作成およびタイトルの設定
@@ -13,18 +18,23 @@ public class Bord extends JFrame {
         // バツボタンでプログラムを終了するようにする
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // ウィンドウサイズの指定
-        frame.setSize(500, 500);
+        frame.setSize(500, 600);
         // ウィンドウを画面中央に配置
         frame.setLocationRelativeTo(null);
         // ウィンドウを可視状態にする
         frame.setVisible(true);
 
         JPanel mainPanel = new JPanel(new GridLayout(3, 3));
+        mainPanel.setPreferredSize(new Dimension(500, 500));
         frame.add(mainPanel);
 
+        //更新ボタンの作成
+        JButton OK = new JButton("OK");
+        frame.add(OK, BorderLayout.NORTH);
+        
         //フレームを作成する
         JButton[] gameButtons = new JButton[9];
-        int num = 0;
+        //int num ;
         for (int i = 0; i < gameButtons.length; i++) {
             gameButtons[i] = new JButton(String.valueOf(i));
             gameButtons[i].setForeground(Color.white);
@@ -36,30 +46,29 @@ public class Bord extends JFrame {
             gameButtons[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String command = e.getActionCommand();
-                    int num = Integer.parseInt(command);
-                    System.out.println(command);
+                     num = Integer.parseInt(command);
+                    System.out.println("num:"+num);
                 }
             });
             gameButtons[i].setActionCommand(String.valueOf(i));
         }
 
-        gameButtons[num].addActionListener(new ActionListener(){
+        OK.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                for (int count = 0; count < 9; count++) {
-                    if (count % 2 == 0) {
-                        gameButtons[num].setText("o");
-                        int b1 = 1;
-                        System.out.println(b1);
-                    } else {
-                        gameButtons[num].setText("x");
-                        int b1 = -1;
-                        System.out.println(b1);
-                    }
+               // int count = 0;
+                if(count % 2 == 0){
+                    System.out.println("a"+num);
+                    gameButtons[num].setText("o");
+                    count++;
+                }else{
+                    System.out.println("a"+num);
+                    gameButtons[num].setText("x");
+                    count++;
                 }
             }
-            });  //ここまでがイベントの定義
+        });  //ここまでがイベントの定義
+    }
+}
 
 
-                        }
 
-        }
